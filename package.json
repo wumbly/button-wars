@@ -1,28 +1,29 @@
 {
-  "name": "button-wars",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "husky": "^0.14.3",
+	"name": "button-wars",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"body-parser": "^1.18.2",
+		"express": "^4.15.2",
+		"husky": "^0.14.3",
 		"lint-staged": "^6.0.0",
+		"nodemon": "^1.12.5",
 		"prettier": "^1.9.1",
-    "express": "^4.15.2",
-    "nodemon": "^1.12.5",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17",
-    "socket.io": "^2.0.4",
-    "socket.io-client": "^2.0.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "server": "nodemon index.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
+		"react-scripts": "1.0.17",
+		"socket.io": "^2.0.4",
+		"socket.io-client": "^2.0.4"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"server": "nodemon server/index.js",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject",
+		"precommit": "lint-staged"
+	},
+	"lint-staged": {
 		"*.{js,jsx,json,css,md}": ["prettier --write", "git add"]
 	}
 }

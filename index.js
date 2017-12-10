@@ -7,21 +7,28 @@ const Players = require('./server/players');
 io.on('connection', function(socket) {
 	const otherPlayers = Array.from(Players.getPlayers());
 	const player = Players.makePlayer();
+	const playerId = player.id;
+
 	socket.emit('connected', player, otherPlayers);
 	socket.broadcast.emit('playerConnected', player);
+
 	socket.on('disconnect', () => {
-		Players.deletePlayer(player.id);
-		io.emit('playerDisconnected', player.id);
+		Players.deletePlayer(playerId);
+		io.emit('playerDisconnected', playerId);
 	});
-	socket.on('newPosition', e => {
-		console.log(e);
+
+	socket.on('newPosition', ({ x, y }) => {
+		socket.broadcast.emit(
+			'playerUpdated',
+			Players.updatePlayerPosition(playerId, x, y)
+		);
 	});
-	socket.on('clicked', e => {
-		console.log(e);
-	});
-	socket.on('chat message', function(msg) {
-		console.log('message: ' + msg);
-		io.emit('send message', 'got message back');
+
+	socket.on('clicked', id => {
+		socket.broadcast.emit(
+			'playerUpdated',
+			Players.decrementPlayerHealth(playerId)
+		);
 	});
 });
 

@@ -10,8 +10,12 @@ io.on('connection', function(socket) {
 	});
 });
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
+
 app.get('/', function(req, res) {
-	res.send();
+	res.end('');
 });
 
 http.listen(3001, function() {
